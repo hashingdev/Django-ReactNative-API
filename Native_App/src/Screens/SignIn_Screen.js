@@ -7,22 +7,33 @@ import trackerApi from '../api/tracker';
 const SignIn_Screen = () => {
 
 
-    const signup = ({ email, password}) => {
-          try {
-              const response = await trackerApi.post('./signup', { email, password})
-              if(response) {
+    // const signup = ({ email, password}) => {
+    //       try {
+    //           const response = await trackerApi.post('./signup', { email, password})
+    //           if(response) {
+    //               console.log('Login Successfully')
+    //           }
+             
+    //         }
+    //       catch(err) {
+    //             console.log(err)
+    //       }
+    //     };
+
+   
+    function signup( email, password) {
+            try {
+                const response = await trackerApi.post('./signup', { email, password})
+                if(response) {
                   console.log('Login Successfully')
-              }
+                }
              
             }
-          catch(err) {
+            catch(err) {
                 console.log(err)
           }
         };
-
    
-
-
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,21 +63,11 @@ const SignIn_Screen = () => {
             />
             <Spacer>
                 <Button 
-                onPress={() => console.log("Log in")}
+                onPress={signup}
                 title="LOGIN"
                 />
             </Spacer>
-            {/* <Spacer>
-
-                {errorMessage ? 
-                <Text style={styles.errorMessage}>{errorMessage}</Text> 
-                : null}
-
-                <Button 
-                    onPress={() => onSubmit({ email, password})}
-                    title={submitButtonText}
-                />
-            </Spacer> */}
+      
         </>
     );
 }
