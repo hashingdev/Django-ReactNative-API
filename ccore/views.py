@@ -1,17 +1,18 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.contrib.auth.models import User
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import status
+
+from .serializers import UserSerializers
 
 # Create your views here.
+@api_view(['GET', 'POST'])
 def login(request):
     if request.method == 'POST':
-        samp = request.POST.get('samp')
-        if samp == 'login':
-            user = request.POST.get('username')
-            password = request.POST.get('password')
+        data = User.objects.all()
 
-            if user == 'hammad' and password == 'hammad':
-                print('done')
-                return JsonResponse({'success': 'success'})
-            else:
-                print('wrong')
-    return render(request, 'core/login.html')
+        serializer = UserSerializers(data, context={'request': request})
+        return Response(serializer.data)

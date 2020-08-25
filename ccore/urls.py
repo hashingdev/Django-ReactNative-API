@@ -1,6 +1,7 @@
-from django.urls import path
+from django.urls import path, re_path
 from ccore.views import login
+from .views import login
 
 urlpatterns = [
-    path('login', login, name='login'),
+    re_path(r'^api/user/$', login),
 ]
