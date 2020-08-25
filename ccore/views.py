@@ -1,17 +1,12 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from ccore.serializers import UserSerializer
 
-# Create your views here.
-def login(request):
-    if request.method == 'POST':
-        samp = request.POST.get('samp')
-        if samp == 'login':
-            user = request.POST.get('username')
-            password = request.POST.get('password')
 
-            if user == 'hammad' and password == 'hammad':
-                print('done')
-                return JsonResponse({'success': 'success'})
-            else:
-                print('wrong')
-    return render(request, 'core/login.html')
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
