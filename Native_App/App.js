@@ -1,27 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect} from 'react';
-import { StyleSheet, Text, View, Button, fetch } from 'react-native';
+import React, { useEffect, useState} from 'react';
+import { StyleSheet, Text, View, Button,FlatList, fetch } from 'react-native';
 import SignIn_Screen from './src/Screens/SignIn_Screen'
 import axios from 'axios';
 
 export default function App() {
  
   // useEffect(async() => {
-  //    await fetch('http://localhost:8000/users/')
-  //   .then((response) => response.json())
-  //   .then((json) => {
-  //     console.log(json)
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
+  
   //  }, []);
-
+  
+  const [obj, setObj] = useState();
   const getMoviesFromApi = () => {
-    axios.get('localhost:8000/users/1/')
+    axios.get('http://582dc390bf6f.ngrok.io/users/')
     .then(function (response) {
       // handle success
-      console.log(response);
+   //   console.log(response.data.results[0]);
+      setObj(response.data.results);
+    
     })
     .catch(function (error) {
       // handle error
@@ -29,15 +25,36 @@ export default function App() {
     })
   };
  
+  console.log(obj)
   return (
-    <View>
-      <Text>
-        Hello App
+    <View style={{ marginTop: '20%', marginBottom: '10%'}}>
+      <Text style={{ color:"blue", fontSize: 30, fontWeight:'bold'}}>
+        Django App
       </Text>
-      <Button 
-      onPress={getMoviesFromApi}
-      title="Hello"
-      />
+      <FlatList
+                data={obj}
+                keyExtractor = { (item, index) => index.toString() }
+                renderItem= {({item}) => {
+                return ( 
+                    <View>
+                        <Text style={{ fontSize: 20}}>
+                          Email Address: {item.email} {"\n"}
+                          Name : {item.username}
+                          {"\n"}
+                          
+                          UserURL:<Text style={{ color: 'blue'}}> {item.url} </Text>
+                          {"\n"}
+                        </Text>
+                    </View>
+                );
+              }}
+            />
+      <View style={{ marginTop: '20%'}}>
+        <Button 
+          onPress={getMoviesFromApi}
+          title="I Need user Info"
+        />
+      </View>
     </View> 
   );
 }
