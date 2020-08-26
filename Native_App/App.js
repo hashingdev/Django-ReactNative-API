@@ -1,19 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect} from 'react';
+import { StyleSheet, Text, View, Button, fetch } from 'react-native';
 import SignIn_Screen from './src/Screens/SignIn_Screen'
+import axios from 'axios';
 
 export default function App() {
-  // axios({
-  //   method: 'post',
-  //   url: '/user/12345',
-  //   data: {
-  //     firstName: 'Fred',
-  //     lastName: 'Flintstone'
-  //   }
-  // });
+ 
+  // useEffect(async() => {
+  //    await fetch('http://localhost:8000/users/')
+  //   .then((response) => response.json())
+  //   .then((json) => {
+  //     console.log(json)
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
+  //  }, []);
+
+  const getMoviesFromApi = () => {
+    axios.get('localhost:8000/users/1/')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+  };
+ 
   return (
-   <SignIn_Screen />
+    <View>
+      <Text>
+        Hello App
+      </Text>
+      <Button 
+      onPress={getMoviesFromApi}
+      title="Hello"
+      />
+    </View> 
   );
 }
 

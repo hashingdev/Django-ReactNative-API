@@ -21,18 +21,18 @@ const SignIn_Screen = () => {
     //     };
 
    
-    function signup( email, password) {
-            try {
-                const response = await trackerApi.post('./signup', { email, password})
-                if(response) {
-                  console.log('Login Successfully')
-                }
+    // function signup( email, password) {
+    //         try {
+    //             const response = await trackerApi.post('./signup', { email, password})
+    //             if(response) {
+    //               console.log('Login Successfully')
+    //             }
              
-            }
-            catch(err) {
-                console.log(err)
-          }
-        };
+    //         }
+    //         catch(err) {
+    //             console.log(err)
+    //       }
+    //     };
    
     
     const [email, setEmail] = useState('');
