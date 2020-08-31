@@ -1,4 +1,4 @@
-# ++Python Django Installation:++
+# Python Django Installation:
 ## CREATING VIRTUAL ENVIROMENT:
 ```sh
 $ python3 -m venv venv
@@ -14,7 +14,7 @@ $ pip install -r requirements.txt
 ```
 
 
-# ++REACT NATIVE APP INSTALLATION:++
+# REACT NATIVE APP INSTALLATION:
 ## ENVIROMENT SETUP
 ### Frst you need to install npm or yarn package manager
 ```sh
